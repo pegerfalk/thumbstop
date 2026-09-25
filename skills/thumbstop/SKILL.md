@@ -157,11 +157,12 @@ clean, and key frames have been looked at (snapshot).
 **Read:** [references/step-5-deliver.md](references/step-5-deliver.md).
 
 Render the exports, pick the cover, bake it in as frame 0, write the three
-post texts with their upload checklists. With `--preview`: start the preview
-first and wait for a go.
+post texts with their upload checklists, then open the finished video for the
+user. With `--preview`: start the preview first and wait for a go.
 
 **Gate:** the exports pass `ffprobe` (1080×1920, 30 fps, H.264 + AAC), the
-cover is frame 0, three texts are written.
+cover is frame 0, three texts are written, the video is open (or its path
+given when there is no desktop).
 
 ---
 

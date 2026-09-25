@@ -140,9 +140,26 @@ provenance table.
   material/   voice/   composition/   [segments/]
 ```
 
+## Open the video
+
+When the files are verified, open the finished video in the user's default
+player, so the first thing they get is the video itself: `<slug>-music.mp4`,
+or `<slug>-nomusic.mp4` when there is no music export.
+
+```bash
+open <out>/<slug>-music.mp4                  # macOS
+xdg-open <out>/<slug>-music.mp4              # Linux
+cmd.exe /c start "" <out>\<slug>-music.mp4   # Windows
+```
+
+Opening is local only: it never uploads or shares anything. If there is no
+desktop to open it on (a remote or cloud session, SSH, CI), skip it and give
+the full path instead.
+
 ## Telling the user
 
-- Where the videos and the cover are, and the length.
+- Where the videos and the cover are, and the length; say which one was
+  opened.
 - One sentence each: the angle it chose and why, the hook, the payoff.
 - What it could not do (no music track found, a claim it cut for lack of a
   source, material it could not use) — plainly.

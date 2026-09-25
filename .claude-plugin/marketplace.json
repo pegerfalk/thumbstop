@@ -1,0 +1,14 @@
+{
+  "name": "thumbstop",
+  "description": "Stop the scroll. Turn the project you built into a vertical video for TikTok and Reels, with one command.",
+  "owner": {
+    "name": "Viktor Pegerfalk"
+  },
+  "plugins": [
+    {
+      "name": "thumbstop",
+      "source": "./",
+      "description": "Turn the current project into a short vertical video that stops the scroll: hook first, built from the project's own words and visuals, safe for TikTok, Instagram Reels and Facebook Reels. Optional local voiceover with word-timed captions."
+    }
+  ]
+}

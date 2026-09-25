@@ -1,0 +1,32 @@
+# Secrets: never in the repo
+.env
+.env.*
+!.env.example
+secrets/
+*.key
+*.pem
+
+# Renders and test runs (large, generated)
+runs/
+thumbstop-output*/
+**/composition/node_modules/
+node_modules/
+__pycache__/
+.venv/
+
+# ende.app music is not redistributed (see skills/thumbstop/assets/music/LICENSE-music.md).
+upstream/**/assets/music/*.mp3
+skills/**/assets/music/*.mp3
+skills/**/assets/music/*.wav
+
+# macOS
+.DS_Store
+
+# Local development only: planning notes (Swedish), the untouched /brag
+# reference copy, and the dev environment (hooks, permissions). The skill
+# symlinks in .claude/, .agents/ and .opencode/ are committed.
+notes/
+upstream/
+CLAUDE.md
+.claude/*
+!.claude/skills/

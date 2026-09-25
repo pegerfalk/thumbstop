@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thumbstop · Stop the scroll</title>
+  <meta name="description" content="An agent skill that turns the project you're working on into a vertical video for TikTok, Instagram Reels and Facebook Reels. One command." />
+  <meta property="og:title" content="Thumbstop · Stop the scroll" />
+  <meta property="og:description" content="One command turns your project into a vertical video that stops the scroll." />
+  <meta property="og:image" content="media/thumbstop-stop-your-thumb.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #111214; --ink-2: #1c1e22; --line: #2c2f35;
+      --paper: #f2efe8; --dim: #8d8b84; --signal: #ff4d2e;
+      --display: 'Oswald', 'Arial Narrow', sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 16px; line-height: 1.6; }
+    a { color: var(--paper); text-decoration-color: var(--signal); text-underline-offset: 3px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+    header { padding: 72px 0 40px; }
+    .mark { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(64px, 14vw, 148px);
+      line-height: 0.92; margin: 0; letter-spacing: 0.005em; }
+    .bar { width: 180px; height: 12px; background: var(--signal); margin: 22px 0 26px; }
+    .tagline { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.05; margin: 0 0 18px; }
+    .tagline span { background: var(--signal); color: var(--ink); padding: 0 8px; border-radius: 4px; }
+    .lede { max-width: 640px; color: #c9c6be; margin: 0; }
+    .lede + .lede { margin-top: 14px; }
+
+    .reels { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 380px; padding: 40px 0 16px; }
+    .reel { margin: 0; }
+    .phone { position: relative; background: #2a2c31; border-radius: 34px; padding: 9px; box-shadow: 0 0 0 1px #3b3e44, 0 30px 70px rgba(0,0,0,0.55); }
+    .phone video { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 26px; background: #000; cursor: pointer; }
+    .sound { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); font: 700 12px/1 var(--mono);
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--paper); border: 0;
+      padding: 9px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+    .sound[aria-pressed="true"] { background: var(--signal); }
+    figcaption { margin-top: 14px; font-size: 14px; color: var(--dim); }
+    figcaption b { display: block; color: var(--paper); font-family: var(--display); font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+    figcaption code { color: var(--signal); }
+
+    section { padding: 48px 0; border-top: 1px solid var(--line); }
+    h2 { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: 34px; line-height: 1.05; margin: 0 0 22px; }
+    .term { background: var(--ink-2); border-radius: 16px; padding: 22px 24px; box-shadow: 0 0 0 1px var(--line); overflow-x: auto; }
+    .term + .term { margin-top: 14px; }
+    .term .label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+    .term pre { margin: 0; font: 15px/1.7 var(--mono); color: var(--paper); }
+    .term pre .c { color: var(--signal); font-weight: 700; }
+    .copy { float: right; font: 700 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink);
+      background: var(--paper); border: 0; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+
+    .points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; }
+    .points li { padding-left: 22px; position: relative; color: #c9c6be; }
+    .points li::before { content: "→"; position: absolute; left: 0; color: var(--signal); font-weight: 700; }
+    .points strong { color: var(--paper); }
+
+    .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .pair div { background: var(--paper); color: var(--ink); border-radius: 14px; padding: 20px 22px; }
+    .pair h3 { font-family: var(--display); text-transform: uppercase; font-size: 24px; margin: 0 0 6px; }
+    .pair p { margin: 0; font-size: 15px; }
+
+    footer { padding: 40px 0 64px; border-top: 1px solid var(--line); color: var(--dim); font-size: 14px; }
+    footer p { margin: 0 0 8px; }
+
+    @media (max-width: 760px) {
+      header { padding-top: 48px; }
+      .reels { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .points, .pair { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 class="mark">Thumbstop</h1>
+      <div class="bar"></div>
+      <p class="tagline">Stop <span>the scroll.</span></p>
+      <p class="lede">An agent skill that turns the project you're working on into a short vertical video for
+        TikTok, Instagram Reels and Facebook Reels. One command: <code>/thumbstop</code>. It reads your project,
+        finds the one idea worth saying, and builds the video from your own words and visuals.</p>
+      <p class="lede">The name comes from the <em>thumb-stop</em>: the moment a scrolling thumb stops on a video.
+        Thumbstop is designed to stop your thumb.</p>
+    </header>
+
+    <div class="reels">
+      <figure class="reel">
+        <div class="phone">
+          <video src="media/thumbstop-stop-your-thumb.mp4" poster="media/thumbstop-stop-your-thumb.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <button class="sound" type="button" aria-pressed="false">Sound on</button>
+        </div>
+        <figcaption><b>Made with /thumbstop</b>The skill run on its own repo: hooks, truth check and render. No voice.</figcaption>
+      </figure>
+    </div>
+
+    <section>
+      <h2>Install</h2>
+      <div class="term">
+        <button class="copy" type="button" data-copy="/plugin marketplace add pegerfalk/thumbstop&#10;/plugin install thumbstop@thumbstop">Copy</button>
+        <div class="label">Claude Code</div>
+        <pre><span class="c">&gt;</span> /plugin marketplace add pegerfalk/thumbstop
+<span class="c">&gt;</span> /plugin install thumbstop@thumbstop</pre>
+      </div>
+      <div class="term">
+        <button class="copy" type="button" data-copy="npx skills add https://github.com/pegerfalk/thumbstop --skill thumbstop">Copy</button>
+        <div class="label">Cursor, Codex, Copilot, Gemini CLI, opencode and more</div>
+        <pre><span class="c">$</span> npx skills add https://github.com/pegerfalk/thumbstop --skill thumbstop</pre>
+      </div>
+      <div class="term">
+        <div class="label">Then, in any project</div>
+        <pre><span class="c">&gt;</span> /thumbstop
+<span class="c">&gt;</span> /thumbstop --voice</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>What it does</h2>
+      <ul class="points">
+        <li><strong>Hook first.</strong> Three hooks, scored; the first second carries an image, the hook line and a sound.</li>
+        <li><strong>True claims only.</strong> Every number and claim traces to a file in your project, or it is cut.</li>
+        <li><strong>Never a still frame.</strong> Lines build phrase by phrase on the music's beat; something moves about every second beat.</li>
+        <li><strong>Platform-safe.</strong> All text stays out of the TikTok, Instagram and Facebook UI zones, checked automatically.</li>
+        <li><strong>Real product on screen.</strong> Your own media when you have it, otherwise the product rebuilt from its source.</li>
+        <li><strong>Ready to post.</strong> An export without music (plus one with, when you add a track), a cover baked in as frame 0, and a post text per platform.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Launching or posting?</h2>
+      <div class="pair">
+        <div><h3>/brag</h3><p>A landscape launch video of the thing you built. For the launch post.</p></div>
+        <div><h3>/thumbstop</h3><p>Vertical videos for the feed, made to stop the scroll. For every post after.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>MIT. A fork of <a href="https://github.com/latent-spaces/brag">/brag</a> by Shunit Haviv Hakimi. Video engine:
+        <a href="https://hyperframes.heygen.com/">Hyperframes</a>. Voice: Kokoro, local.</p>
+      <p>Music in the video: Happy Beats &amp; Business Moves Vol. 10 by Sascha Ende,
+        <a href="https://ende.app/en">ende.app</a> (CC BY 4.0).</p>
+      <p><a href="https://github.com/pegerfalk/thumbstop">github.com/pegerfalk/thumbstop</a></p>
+    </footer>
+  </div>
+  <script>
+    document.querySelectorAll('.phone').forEach(function (phone) {
+      var video = phone.querySelector('video');
+      var button = phone.querySelector('.sound');
+      function toggle() {
+        var on = video.muted;
+        document.querySelectorAll('.phone video').forEach(function (v) { v.muted = true; });
+        document.querySelectorAll('.sound').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); b.textContent = 'Sound on'; });
+        if (on) {
+          video.muted = false; video.currentTime = 0; video.play();
+          button.setAttribute('aria-pressed', 'true'); button.textContent = 'Sound off';
+        }
+      }
+      button.addEventListener('click', toggle);
+      video.addEventListener('click', toggle);
+    });
+    document.querySelectorAll('.copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var text = b.getAttribute('data-copy');
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () {
+          b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1400);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

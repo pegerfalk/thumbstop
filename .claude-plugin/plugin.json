@@ -1,0 +1,18 @@
+{
+  "name": "thumbstop",
+  "description": "Turn the current project into a short vertical video that stops the scroll: hook first, built from the project's own words and visuals, safe for TikTok, Instagram Reels and Facebook Reels. Optional local voiceover with word-timed captions.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Viktor Pegerfalk"
+  },
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "tiktok",
+    "reels",
+    "short-form",
+    "captions",
+    "hyperframes",
+    "skill"
+  ]
+}
